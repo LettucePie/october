@@ -3,29 +3,27 @@ class_name Ring
 
 const RADIUS_MIN : float = 20
 const RADIUS_MAX : float = 250
+const SEG_MIN : int = 10
+const SEG_MAX : int = 125
 
 @export var offset : Vector2 = Vector2.ZERO
 @export var radius : float = clampf(20, RADIUS_MIN, RADIUS_MAX)
+@export var segments : int = 10
 @export var color : Color = Color.WHITE
 @export var width : float = 10.0
 
 ## Testing
-var grow : float = 2.0
-
-
-func _clean_scale():
-	pass
+var grow : float = 1.2
 
 
 func _process(delta: float) -> void:
 	var radius_percent = inverse_lerp(RADIUS_MIN, RADIUS_MAX, radius)
 	radius_percent = clamp(radius_percent + grow * delta, 0.0, 1.0)
 	radius = lerpf(RADIUS_MIN, RADIUS_MAX, radius_percent)
-	if radius_percent >= 1.0 and grow > 0.0:
-		grow = -2.0
-	elif radius_percent <= 0.0 and grow < 0.0:
-		grow = 2.0
-	_clean_scale()
+	if (radius_percent >= 1.0 and grow > 0.0) \
+	or (radius_percent <= 0.0 and grow < 0.0):
+		grow *= -1.0
+	segments = roundi(lerp(SEG_MIN, SEG_MAX, radius_percent))
 	queue_redraw()
 
 
@@ -36,7 +34,7 @@ func _draw() -> void:
 		radius,
 		0,
 		PI * 2 - PI / 16,
-		18,
+		segments,
 		color,
 		width,
 		true
