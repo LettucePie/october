@@ -3,7 +3,7 @@ class_name Ring
 
 const RADIUS_MIN : float = 20
 const RADIUS_MAX : float = 250
-const SEG_MIN : int = 10
+const SEG_MIN : int = 15
 const SEG_MAX : int = 125
 
 @export var offset : Vector2 = Vector2.ZERO
@@ -13,7 +13,7 @@ const SEG_MAX : int = 125
 @export var width : float = 10.0
 
 ## Testing
-var grow : float = 1.2
+var grow : float = 0.6
 
 
 func _process(delta: float) -> void:
@@ -33,7 +33,7 @@ func _draw() -> void:
 		Vector2.ZERO,
 		radius,
 		0,
-		PI * 2 - PI / 16,
+		PI * 2,
 		segments,
 		color,
 		width,
