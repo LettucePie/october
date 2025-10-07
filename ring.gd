@@ -1,8 +1,8 @@
 extends Node2D
 class_name Ring
 
-const RADIUS_MIN : float = 20
-const RADIUS_MAX : float = 250
+const RADIUS_MIN : float = 30
+const RADIUS_MAX : float = 230
 const SEG_MIN : int = 15
 const SEG_MAX : int = 125
 
