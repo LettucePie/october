@@ -6,17 +6,10 @@ class_name Cutout
 func _draw() -> void:
 	#draw_rect(
 		#Rect2(-250, -250, 500, 500),
-		#Color.WHITE,
-		#true,
-		#-1.0,
-		#false
-	#)
-	#draw_rect(
-		#Rect2(0, -20, 500, 40),
 		#Color.BLACK,
 		#true,
 		#-1.0,
-		#true
+		#false
 	#)
 	draw_rect(
 		Rect2(-250, -250, 250, 500),
@@ -38,4 +31,18 @@ func _draw() -> void:
 		true,
 		-1.0,
 		false
+	)
+	draw_rect(
+		Rect2(0, -20, 500, 40),
+		Color(Color.BLACK, 0),
+		true,
+		-1.0,
+		true
+	)
+	draw_rect(
+		Rect2(-20, 0, 40, 500),
+		Color(Color.BLACK, 0),
+		true,
+		-1.0,
+		true
 	)

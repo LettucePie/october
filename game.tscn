@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuqejiribu1et"]
+[gd_scene load_steps=2 format=3 uid="uid://cuqejiribu1et"]
 
 [ext_resource type="PackedScene" uid="uid://bbod4740o7cm7" path="res://ring.tscn" id="1_80nbo"]
-[ext_resource type="PackedScene" uid="uid://cbwayarel2uvl" path="res://cutout.tscn" id="2_e2o6t"]
 
 [node name="Game" type="Node"]
 
@@ -9,8 +8,3 @@
 position = Vector2(541, 298)
 
 [node name="Ring" parent="RingHold" instance=ExtResource("1_80nbo")]
-clip_children = 1
-color = Color(1, 0.54509807, 1, 1)
-
-[node name="Cutout" parent="RingHold/Ring" instance=ExtResource("2_e2o6t")]
-clip_children = 0
