@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuqejiribu1et"]
+[gd_scene load_steps=3 format=3 uid="uid://cuqejiribu1et"]
 
 [ext_resource type="PackedScene" uid="uid://bbod4740o7cm7" path="res://ring.tscn" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://ciqksjm2orhao" path="res://cutout_bar_5.png" id="2_e2o6t"]
 
 [node name="Game" type="Node"]
 
 [node name="RingHold" type="Node2D" parent="."]
 position = Vector2(541, 298)
 
-[node name="Ring" parent="RingHold" instance=ExtResource("1_80nbo")]
+[node name="Sprite2D" type="Sprite2D" parent="RingHold"]
+clip_children = 1
+texture = ExtResource("2_e2o6t")
+
+[node name="Ring" parent="RingHold/Sprite2D" instance=ExtResource("1_80nbo")]
+clip_children = 2
