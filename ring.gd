@@ -13,8 +13,10 @@ var light_rotate_var : float = 1.0
 
 
 func _ready() -> void:
-	light_rotate_var = randf_range(-1.0, 1.0)
+	light_rotate_var = randf_range(0.8, 2.0)
+	#if randf() < 0.5:
+		#light_rotate_var *= -1.0
 
 
 func _process(delta: float) -> void:
-	light.rotation += delta * (light_rotate_var * 2)
+	light.rotation += delta * light_rotate_var
