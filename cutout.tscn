@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbwayarel2uvl"]
-
-[ext_resource type="Script" uid="uid://dw0a4vijo54y2" path="res://cutout.gd" id="1_uefi2"]
-
-[node name="Cutout" type="Node2D"]
-script = ExtResource("1_uefi2")
