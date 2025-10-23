@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3py07223e7mq"]
+
+[ext_resource type="Script" uid="uid://djs1b52ef4ukb" path="res://ring.gd" id="1_jyp2f"]
+[ext_resource type="Texture2D" uid="uid://b862wyybjyu6b" path="res://rings/lvl1_cut_b.png" id="2_8qe2f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ubbll"]
+radius = 34.0
+
+[sub_resource type="Gradient" id="Gradient_veync"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5i5bl"]
+gradient = SubResource("Gradient_veync")
+width = 500
+height = 500
+
+[node name="Ring_1B" type="Node2D"]
+script = ExtResource("1_jyp2f")
+level = 1
+cutout_shape = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 16
+texture = ExtResource("2_8qe2f")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(223, 0)
+shape = SubResource("CircleShape2D_ubbll")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(0, 223)
+shape = SubResource("CircleShape2D_ubbll")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.08936692, 0.7228654, 0.99999994, 1)
+blend_mode = 2
+range_item_cull_mask = 16
+texture = SubResource("GradientTexture2D_5i5bl")

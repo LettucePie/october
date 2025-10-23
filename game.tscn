@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuqejiribu1et"]
+[gd_scene load_steps=8 format=3 uid="uid://cuqejiribu1et"]
 
 [ext_resource type="Script" uid="uid://cfol2u0316a1" path="res://ring_level.gd" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bdd177d25nwm" path="res://game.gd" id="1_ryrav"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b1gaxp4oi33wh" path="res://rings/ring_2a.tscn" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dgolblnjyhh4o" path="res://rings/ring_3a.tscn" id="4_ryrav"]
 [ext_resource type="PackedScene" uid="uid://dk562dv21sngq" path="res://rings/ring_4a.tscn" id="5_eow3j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
+size = Vector2(300, 10)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ryrav")
@@ -32,3 +35,9 @@ ring_scenes = Array[PackedScene]([ExtResource("4_ryrav")])
 script = ExtResource("1_80nbo")
 ring_level = 4
 ring_scenes = Array[PackedScene]([ExtResource("5_eow3j")])
+
+[node name="solution" type="Area2D" parent="center"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="center/solution"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_ryrav")
