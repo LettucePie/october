@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuqejiribu1et"]
+[gd_scene load_steps=7 format=3 uid="uid://cuqejiribu1et"]
 
 [ext_resource type="Script" uid="uid://cfol2u0316a1" path="res://ring_level.gd" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://bdd177d25nwm" path="res://game.gd" id="1_ryrav"]
 [ext_resource type="PackedScene" uid="uid://c0vwy80omkc5w" path="res://rings/ring_1a.tscn" id="2_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://b1gaxp4oi33wh" path="res://rings/ring_2a.tscn" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dgolblnjyhh4o" path="res://rings/ring_3a.tscn" id="4_ryrav"]
 [ext_resource type="PackedScene" uid="uid://dk562dv21sngq" path="res://rings/ring_4a.tscn" id="5_eow3j"]
 
 [node name="Game" type="Node"]
+script = ExtResource("1_ryrav")
 
 [node name="center" type="Node2D" parent="."]
 position = Vector2(576, 324)
