@@ -13,7 +13,7 @@ var segment_levels : PackedVector2Array = []
 var ring_selected_id : int = -1
 var ring_selected_rot : float = -1000
 var click_on_pos : Vector2 = Vector2.ZERO
-
+var ring_targets : PackedFloat32Array = []
 
 func _ready() -> void:
 	if !get_window().size_changed.is_connected(recenter):
@@ -25,6 +25,10 @@ func _ready() -> void:
 			if c is Ring_Level:
 				ring_levels.append(c)
 	_calc_segment_levels(ring_levels.size())
+	## Setup base rotation values
+	ring_targets.resize(ring_levels.size())
+	for i in ring_levels.size():
+		ring_targets[i] = ring_levels[i].rotation
 
 
 func recenter() -> void:
@@ -38,6 +42,11 @@ func recenter() -> void:
 
 func dial_ring_to(id : int, rot : float) -> void:
 	ring_levels[id].rotation = rot
+
+
+func _process(delta: float) -> void:
+	for i in ring_levels.size():
+		dial_ring_to(i, lerp_angle(ring_levels[i].rotation, ring_targets[i], 8 * delta))
 
 
 func _calc_segment_levels(steps : int):
@@ -87,7 +96,8 @@ func _move_event(event : InputEventMouseMotion):
 	var angle_b : float = Vector2.RIGHT.angle_to(localized_mouse_pos.normalized())
 	var angle_diff : float = angle_b - angle_a
 	print("AngleA: ", angle_a, " | AngleB: ", angle_b, " | AngleDiff: ", angle_diff)
-	dial_ring_to(ring_selected_id, ring_selected_rot + angle_diff)
+	ring_targets[ring_selected_id] = ring_selected_rot + angle_diff
+	#dial_ring_to(ring_selected_id, ring_selected_rot + angle_diff)
 
 
 func _input(event: InputEvent) -> void:
