@@ -9,6 +9,11 @@ var click_max : float = DEF_click_max
 var click_min : float = DEF_click_min
 var segment_levels : PackedVector2Array = []
 
+## Click Event Stuff
+var ring_selected_id : int = -1
+var ring_selected_rot : float = -1000
+var click_on_pos : Vector2 = Vector2.ZERO
+
 
 func _ready() -> void:
 	if !get_window().size_changed.is_connected(recenter):
@@ -29,6 +34,10 @@ func recenter() -> void:
 	if ring_levels.size() > 0:
 		for ring_level in ring_levels:
 			ring_level.rescale()
+
+
+func dial_ring_to(id : int, rot : float) -> void:
+	ring_levels[id].rotation = rot
 
 
 func _calc_segment_levels(steps : int):
@@ -53,10 +62,36 @@ func _check_segment(dist : float) -> int:
 	return result
 
 
+func _active_ring_forget() -> void:
+	ring_selected_id = -1
+	ring_selected_rot = -1000
+	click_on_pos = Vector2.ZERO
+
+
+func _click_event(event : InputEventMouseButton):
+	if event.pressed:
+		var local_pos : Vector2 = event.position - ring_center.global_position
+		var dist : float = Vector2.ZERO.distance_to(local_pos)
+		_active_ring_forget()
+		if _check_segment(dist - click_min) >= 0:
+			ring_selected_id = _check_segment(dist - click_min)
+			ring_selected_rot = ring_levels[ring_selected_id].rotation
+			click_on_pos = local_pos
+	else:
+		_active_ring_forget()
+
+
+func _move_event(event : InputEventMouseMotion):
+	var localized_mouse_pos : Vector2 = event.position - ring_center.global_position
+	var angle_a : float = Vector2.RIGHT.angle_to(click_on_pos.normalized())
+	var angle_b : float = Vector2.RIGHT.angle_to(localized_mouse_pos.normalized())
+	var angle_diff : float = angle_b - angle_a
+	print("AngleA: ", angle_a, " | AngleB: ", angle_b, " | AngleDiff: ", angle_diff)
+	dial_ring_to(ring_selected_id, ring_selected_rot + angle_diff)
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.pressed:
-			var local_pos : Vector2 = event.position - ring_center.global_position
-			var dist : float = Vector2.ZERO.distance_to(local_pos)
-			print(local_pos, " | ", dist)
-			print(_check_segment(dist - click_min))
+		_click_event(event)
+	if event is InputEventMouseMotion and ring_selected_id >= 0:
+		_move_event(event)

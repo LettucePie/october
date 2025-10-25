@@ -16,25 +16,25 @@ script = ExtResource("1_ryrav")
 [node name="center" type="Node2D" parent="." groups=["Center"]]
 position = Vector2(576, 324)
 
-[node name="lvl1" type="Node2D" parent="center"]
+[node name="lvl4" type="Node2D" parent="center"]
 script = ExtResource("1_80nbo")
-ring_level = 1
-ring_scenes = Array[PackedScene]([ExtResource("2_e2o6t")])
-
-[node name="lvl2" type="Node2D" parent="center"]
-script = ExtResource("1_80nbo")
-ring_level = 2
-ring_scenes = Array[PackedScene]([ExtResource("3_7jktm")])
+ring_level = 4
+ring_scenes = Array[PackedScene]([ExtResource("5_eow3j")])
 
 [node name="lvl3" type="Node2D" parent="center"]
 script = ExtResource("1_80nbo")
 ring_level = 3
 ring_scenes = Array[PackedScene]([ExtResource("4_ryrav")])
 
-[node name="lvl4" type="Node2D" parent="center"]
+[node name="lvl2" type="Node2D" parent="center"]
 script = ExtResource("1_80nbo")
-ring_level = 4
-ring_scenes = Array[PackedScene]([ExtResource("5_eow3j")])
+ring_level = 2
+ring_scenes = Array[PackedScene]([ExtResource("3_7jktm")])
+
+[node name="lvl1" type="Node2D" parent="center"]
+script = ExtResource("1_80nbo")
+ring_level = 1
+ring_scenes = Array[PackedScene]([ExtResource("2_e2o6t")])
 
 [node name="solution" type="Area2D" parent="center"]
 
