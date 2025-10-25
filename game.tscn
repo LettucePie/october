@@ -13,7 +13,7 @@ size = Vector2(300, 10)
 [node name="Game" type="Node"]
 script = ExtResource("1_ryrav")
 
-[node name="center" type="Node2D" parent="."]
+[node name="center" type="Node2D" parent="." groups=["Center"]]
 position = Vector2(576, 324)
 
 [node name="lvl1" type="Node2D" parent="center"]
