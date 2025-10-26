@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuqejiribu1et"]
+[gd_scene load_steps=4 format=3 uid="uid://cuqejiribu1et"]
 
 [ext_resource type="Script" uid="uid://bdd177d25nwm" path="res://game.gd" id="1_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bj3bhkl78bpfk" path="res://stages/stage_00_test.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://cgatjnj826qbc" path="res://components/waypoint.gd" id="3_feb5d"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("center_stage")]
 script = ExtResource("1_ryrav")
 center_stage = NodePath("stage")
+
+[node name="waypoint" type="Node2D" parent="."]
+script = ExtResource("3_feb5d")
 
 [node name="stage" parent="." instance=ExtResource("2_e2o6t")]
 position = Vector2(576, 324)
