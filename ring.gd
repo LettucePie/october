@@ -1,6 +1,6 @@
 extends Node2D
 class_name Ring
-
+signal ring_solved(ring, tf)
 
 @export var level : int = 0
 enum CUTOUT {A, B, C, D}
@@ -13,6 +13,7 @@ enum CUTOUT {A, B, C, D}
 
 
 var light_rotate_var : float = 1.0
+var solution : bool = false
 
 
 func _ready() -> void:
@@ -32,4 +33,6 @@ func _process(delta: float) -> void:
 
 
 func solution_proxima(tf : bool) -> void:
-	print("Ring: ", self.name, " Solution: ", tf)
+	#print("Ring: ", self.name, " Solution: ", tf)
+	solution = tf
+	ring_solved.emit(self, tf)
