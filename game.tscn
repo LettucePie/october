@@ -1,43 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuqejiribu1et"]
+[gd_scene load_steps=3 format=3 uid="uid://cuqejiribu1et"]
 
-[ext_resource type="Script" uid="uid://cfol2u0316a1" path="res://ring_level.gd" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://bdd177d25nwm" path="res://game.gd" id="1_ryrav"]
-[ext_resource type="PackedScene" uid="uid://c0vwy80omkc5w" path="res://rings/ring_1a.tscn" id="2_e2o6t"]
-[ext_resource type="PackedScene" uid="uid://b1gaxp4oi33wh" path="res://rings/ring_2a.tscn" id="3_7jktm"]
-[ext_resource type="PackedScene" uid="uid://dgolblnjyhh4o" path="res://rings/ring_3a.tscn" id="4_ryrav"]
-[ext_resource type="PackedScene" uid="uid://dk562dv21sngq" path="res://rings/ring_4a.tscn" id="5_eow3j"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
-size = Vector2(300, 10)
+[ext_resource type="PackedScene" uid="uid://bj3bhkl78bpfk" path="res://stages/stage_00_test.tscn" id="2_e2o6t"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ryrav")
 
-[node name="center" type="Node2D" parent="." groups=["Center"]]
+[node name="stage" parent="." instance=ExtResource("2_e2o6t")]
 position = Vector2(576, 324)
 
-[node name="lvl4" type="Node2D" parent="center"]
-script = ExtResource("1_80nbo")
-ring_level = 4
-ring_scenes = Array[PackedScene]([ExtResource("5_eow3j")])
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="lvl3" type="Node2D" parent="center"]
-script = ExtResource("1_80nbo")
-ring_level = 3
-ring_scenes = Array[PackedScene]([ExtResource("4_ryrav")])
-
-[node name="lvl2" type="Node2D" parent="center"]
-script = ExtResource("1_80nbo")
-ring_level = 2
-ring_scenes = Array[PackedScene]([ExtResource("3_7jktm")])
-
-[node name="lvl1" type="Node2D" parent="center"]
-script = ExtResource("1_80nbo")
-ring_level = 1
-ring_scenes = Array[PackedScene]([ExtResource("2_e2o6t")])
-
-[node name="solution" type="Area2D" parent="center"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="center/solution"]
-position = Vector2(150, 0)
-shape = SubResource("RectangleShape2D_ryrav")
+[node name="status" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -171.5
+offset_right = 171.5
+offset_bottom = 55.0
+grow_horizontal = 2
+horizontal_alignment = 1
+vertical_alignment = 1

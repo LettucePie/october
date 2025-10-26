@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djs1b52ef4ukb" path="res://ring.gd" id="1_veync"]
 [ext_resource type="Texture2D" uid="uid://okeftlnsmbmv" path="res://rings/lvl4_cut_a.png" id="2_veync"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ubbll"]
-radius = 34.0
+[ext_resource type="PackedScene" uid="uid://c3mtytyei13l8" path="res://components/clearing.tscn" id="3_5i5bl"]
 
 [sub_resource type="Gradient" id="Gradient_veync"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
@@ -14,22 +12,20 @@ gradient = SubResource("Gradient_veync")
 width = 500
 height = 500
 
-[node name="Ring_4A" type="Node2D"]
+[node name="Ring_4A" type="Node2D" node_paths=PackedStringArray("clearings")]
 script = ExtResource("1_veync")
 level = 3
+clearings = [NodePath("clearing")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
 texture = ExtResource("2_veync")
-
-[node name="Area2D" type="Area2D" parent="Sprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(69, 0)
-shape = SubResource("CircleShape2D_ubbll")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.46612352, 0.7683025, 3.85046e-07, 1)
 blend_mode = 2
 range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_5i5bl")
+
+[node name="clearing" parent="." instance=ExtResource("3_5i5bl")]
+position = Vector2(71, 0)
