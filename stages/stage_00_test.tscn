@@ -14,12 +14,16 @@ script = ExtResource("1_wpvf4")
 solution_area = NodePath("solution")
 
 [node name="Ring_4A" parent="." instance=ExtResource("3_ntpsw")]
+rotation = 2.8064895
 
 [node name="Ring_3A" parent="." instance=ExtResource("4_qc57x")]
+rotation = -0.97563905
 
 [node name="Ring_2A" parent="." instance=ExtResource("5_ryxgy")]
+rotation = 1.097812
 
 [node name="Ring_1A" parent="." instance=ExtResource("6_uh41k")]
+rotation = 3.5377824
 
 [node name="solution" type="Area2D" parent="." groups=["Solution"]]
 

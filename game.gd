@@ -14,6 +14,8 @@ func _ready() -> void:
 		for c in get_children():
 			if c is Stage:
 				center_stage = c
+	if !center_stage.stage_solved.is_connected(stage_solved):
+		center_stage.stage_solved.connect(stage_solved)
 
 
 func recenter() -> void:
