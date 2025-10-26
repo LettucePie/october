@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dled7keirclfi"]
+
+[ext_resource type="Script" uid="uid://cykug2x5ji3h3" path="res://stage.gd" id="1_p3s4r"]
+[ext_resource type="PackedScene" uid="uid://dk562dv21sngq" path="res://rings/ring_4a.tscn" id="2_ww81d"]
+[ext_resource type="PackedScene" uid="uid://dgolblnjyhh4o" path="res://rings/ring_3a.tscn" id="3_unakv"]
+[ext_resource type="PackedScene" uid="uid://b1gaxp4oi33wh" path="res://rings/ring_2a.tscn" id="4_7fril"]
+[ext_resource type="PackedScene" uid="uid://c3py07223e7mq" path="res://rings/ring_1b.tscn" id="5_p3s4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
+size = Vector2(300, 10)
+
+[node name="stage_01_test" type="Node2D" node_paths=PackedStringArray("solution_area") groups=["Center"]]
+script = ExtResource("1_p3s4r")
+solution_area = NodePath("solution")
+
+[node name="Ring_4A" parent="." instance=ExtResource("2_ww81d")]
+rotation = 2.8064895
+
+[node name="Ring_3A" parent="." instance=ExtResource("3_unakv")]
+rotation = -0.97563905
+
+[node name="Ring_2A" parent="." instance=ExtResource("4_7fril")]
+rotation = 1.097812
+
+[node name="Ring_1B" parent="." instance=ExtResource("5_p3s4r")]
+rotation = 1.8308504
+
+[node name="solution" type="Area2D" parent="." groups=["Solution"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="solution"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_ryrav")

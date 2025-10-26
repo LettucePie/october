@@ -63,6 +63,23 @@ func dial_ring_to(id : int, rot : float) -> void:
 	rings[id].rotation = rot
 
 
+func _snap_ring_to_solution(id : int) -> void:
+	print("Snapping Ring: ", id)
+	var ring : Ring = rings[id]
+	var ring_rot : float = ring.rotation
+	var offset = -1.0
+	if ring_rot >= 0:
+		offset = 1.0
+	
+	var viable_angles : PackedFloat32Array = []
+	for clearing in ring.clearings:
+		viable_angles.append(Vector2.RIGHT.angle_to(clearing.position.normalized()))
+	var closest_snap_angle : float = viable_angles[0]
+	print("RINGROT: ", ring.rotation, " | FIXED: ", ring_rot)
+	print("RING VIABLES: ", viable_angles)
+	print("What if I added the TAU or PI to the viables based on divisible into current rot?")
+
+
 func _check_solution() -> bool:
 	var result : bool = false
 	if rings.size() == solution_status.size():
@@ -104,6 +121,9 @@ func _click_event(event : InputEventMouseButton):
 			ring_selected_rot = rings[ring_selected_id].rotation
 			click_on_pos = local_pos
 	else:
+		if ring_selected_id >= 0:
+			if solution_status[ring_selected_id]:
+				_snap_ring_to_solution(ring_selected_id)
 		_active_ring_forget()
 
 
@@ -128,5 +148,7 @@ func ring_status_report(ring : Ring, solved : bool) -> void:
 	print("RING:" , ring, " REPORTS: ", solved, " to CENTER STAGE")
 	var idx = rings.find(ring)
 	solution_status[idx] = solved
+	if ring_selected_id != idx and solved:
+		_snap_ring_to_solution(idx)
 	if _check_solution():
 		emit_signal("stage_solved")

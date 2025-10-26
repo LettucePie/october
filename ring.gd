@@ -19,13 +19,14 @@ var solution : bool = false
 func _ready() -> void:
 	light_rotate_var = randf_range(0.8, 2.0)
 	if clearings.size() <= 0:
-		print("**ERROR** UNSOLVABLE RING")
-	else:
-		for c in clearings:
-			if c.ring_owner != self:
-				c.ring_owner = self
-			if !c.solution_prox.is_connected(solution_proxima):
-				c.solution_prox.connect(solution_proxima)
+		for c in get_children():
+			if c is Clearing:
+				clearings.append(c)
+	for c in clearings:
+		if c.ring_owner != self:
+			c.ring_owner = self
+		if !c.solution_prox.is_connected(solution_proxima):
+			c.solution_prox.connect(solution_proxima)
 
 
 func _process(delta: float) -> void:
