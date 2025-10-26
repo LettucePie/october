@@ -1,9 +1,10 @@
 extends Node2D
 class_name Stage
+signal stage_solved()
 
 @export var solution_area : Area2D
 var rings : Array[Ring] = []
-var solution_status : PackedByteArray = []
+var solution_status : Array[bool] = []
 
 const DEF_click_max = 250.0
 const DEF_click_min = 50.0
@@ -49,6 +50,9 @@ func _ready() -> void:
 	_find_ring_children()
 	_connect_rings()
 	_calc_segment_levels(rings.size())
+	solution_status.resize(rings.size())
+	for val in solution_status:
+		val = false
 	## Setup base rotation values
 	ring_targets.resize(rings.size())
 	for i in rings.size():
@@ -57,6 +61,17 @@ func _ready() -> void:
 
 func dial_ring_to(id : int, rot : float) -> void:
 	rings[id].rotation = rot
+
+
+func _check_solution() -> bool:
+	var result : bool = false
+	if rings.size() == solution_status.size():
+		var solved : bool = true
+		for status in solution_status:
+			if status != true:
+				solved = false
+		result = solved
+	return result
 
 
 func _process(delta: float) -> void:
@@ -111,3 +126,7 @@ func _input(event: InputEvent) -> void:
 
 func ring_status_report(ring : Ring, solved : bool) -> void:
 	print("RING:" , ring, " REPORTS: ", solved, " to CENTER STAGE")
+	var idx = rings.find(ring)
+	solution_status[idx] = solved
+	if _check_solution():
+		emit_signal("stage_solved")

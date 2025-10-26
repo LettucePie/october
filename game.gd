@@ -24,3 +24,18 @@ func recenter() -> void:
 	#if rings.size() > 0:
 		#for ring in rings:
 			#ring.rescale()
+
+
+func stage_solved() -> void:
+	print("STAGE SOLVED")
+
+
+func _process(delta: float) -> void:
+	## TODO test only
+	if center_stage != null:
+		var lineout = "Stage: "
+		if center_stage._check_solution():
+			lineout += "SOLVED"
+		else:
+			lineout += "wrong"
+		$Control/status.text = lineout

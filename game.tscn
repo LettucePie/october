@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://bdd177d25nwm" path="res://game.gd" id="1_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bj3bhkl78bpfk" path="res://stages/stage_00_test.tscn" id="2_e2o6t"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" node_paths=PackedStringArray("center_stage")]
 script = ExtResource("1_ryrav")
+center_stage = NodePath("stage")
 
 [node name="stage" parent="." instance=ExtResource("2_e2o6t")]
 position = Vector2(576, 324)
