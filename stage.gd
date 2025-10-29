@@ -71,8 +71,6 @@ func _snap_ring_to_solution(id : int) -> void:
 	var ring_rot_taud : float = absf(ring_rot) - (tau_count * TAU)
 	if ring_rot_taud / TAU > 0.9:
 		ring_rot_taud -= TAU
-	#if ring_rot_taud > PI:
-		#ring_rot_taud -= PI
 	var viable_angles : PackedFloat32Array = []
 	for clearing in ring.clearings:
 		viable_angles.append(Vector2.RIGHT.angle_to(clearing.position.normalized()))
