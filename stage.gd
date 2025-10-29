@@ -67,17 +67,29 @@ func _snap_ring_to_solution(id : int) -> void:
 	print("Snapping Ring: ", id)
 	var ring : Ring = rings[id]
 	var ring_rot : float = ring.rotation
-	var offset = -1.0
-	if ring_rot >= 0:
-		offset = 1.0
-	
+	var tau_count : int = floori(absf(ring_rot) / TAU)
+	var ring_rot_taud : float = absf(ring_rot) - (tau_count * TAU)
+	if ring_rot_taud / TAU > 0.9:
+		ring_rot_taud -= TAU
 	var viable_angles : PackedFloat32Array = []
 	for clearing in ring.clearings:
 		viable_angles.append(Vector2.RIGHT.angle_to(clearing.position.normalized()))
 	var closest_snap_angle : float = viable_angles[0]
-	print("RINGROT: ", ring.rotation, " | FIXED: ", ring_rot)
+	var max_dist : float = TAU
+	for va in viable_angles:
+		var dist : float = absf(va - ring_rot_taud)
+		if dist <= max_dist:
+			max_dist = dist
+			closest_snap_angle = va
+	var new_target = closest_snap_angle
+	if tau_count > 0:
+		new_target += (TAU * tau_count)
+	if ring_rot < 0:
+		new_target *= -1.0
+	print("RINGROT: ", ring_rot, " | RINGROT_TAUD: ", ring_rot_taud)
 	print("RING VIABLES: ", viable_angles)
-	print("What if I added the TAU or PI to the viables based on divisible into current rot?")
+	print("NEW TARGET: ", new_target)
+	ring_targets[id] = new_target
 
 
 func _check_solution() -> bool:
