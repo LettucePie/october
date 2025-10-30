@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0vwy80omkc5w"]
 
-[ext_resource type="Script" uid="uid://djs1b52ef4ukb" path="res://ring.gd" id="1_hvv5x"]
+[ext_resource type="Script" uid="uid://djs1b52ef4ukb" path="res://rings/ring.gd" id="1_hvv5x"]
 [ext_resource type="Texture2D" uid="uid://b53hr6b7ndtfq" path="res://rings/lvl1_cut_a.png" id="2_fcm0q"]
 [ext_resource type="PackedScene" uid="uid://c3mtytyei13l8" path="res://components/clearing.tscn" id="3_fcm0q"]
 
