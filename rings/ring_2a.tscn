@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1gaxp4oi33wh"]
+[gd_scene load_steps=7 format=3 uid="uid://b1gaxp4oi33wh"]
 
 [ext_resource type="Script" uid="uid://djs1b52ef4ukb" path="res://rings/ring.gd" id="1_ov22u"]
 [ext_resource type="Texture2D" uid="uid://emn3mctwh5id" path="res://rings/lvl2_cut_a.png" id="2_ov22u"]
 [ext_resource type="PackedScene" uid="uid://c3mtytyei13l8" path="res://components/clearing.tscn" id="3_bhuq4"]
+[ext_resource type="Script" uid="uid://2bcvbhamef4s" path="res://components/channel.gd" id="4_awhe1"]
 
 [sub_resource type="Gradient" id="Gradient_veync"]
 colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
@@ -29,3 +30,9 @@ texture = SubResource("GradientTexture2D_5i5bl")
 
 [node name="clearing" parent="." instance=ExtResource("3_bhuq4")]
 position = Vector2(174, 0)
+
+[node name="channel" type="Node2D" parent="."]
+script = ExtResource("4_awhe1")
+radius_multiplier = 3.0
+point_a_angle = 135.0
+point_b_angle = 270.0
