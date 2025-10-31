@@ -1,6 +1,8 @@
 extends Node
 class_name Game
 
+const BASE_WINDOW : Vector2 = Vector2(700, 500)
+
 @export var center_stage : Stage
 #var rings : Array[Ring] = []
 
@@ -21,12 +23,17 @@ func _ready() -> void:
 
 func recenter() -> void:
 	print("Recenter")
-	center_stage.position = get_window().size / 2
-	print(center_stage.position)
-	print("TODO Rescale CenterStage")
-	#if rings.size() > 0:
-		#for ring in rings:
-			#ring.rescale()
+	var win_size : Vector2i = get_window().size
+	center_stage.position = win_size / 2
+	var factor_a : float = BASE_WINDOW.y
+	var factor_b : float = win_size.y
+	if win_size.x < win_size.y:
+		print("Go Vertical")
+		factor_a = BASE_WINDOW.x
+		factor_b = win_size.x
+	else:
+		print("Go Horizontal")
+	center_stage.rescale(Vector2(factor_b / factor_a, factor_b / factor_a))
 
 
 func stage_solved() -> void:

@@ -36,14 +36,21 @@ func _connect_rings() -> void:
 func _calc_segment_levels(steps : int):
 	segment_levels.clear()
 	segment_levels.resize(steps)
-	var new_max = click_max - click_min
+	var new_max = (click_max * scale.x) - (click_min * scale.x)
 	var segment_size = new_max / steps
+	print("Calculated Ring Segment Size: ", segment_size)
 	var x = 0
 	var y = segment_size
 	for i in steps:
 		segment_levels[i] = Vector2(x, y)
 		x = y
 		y += segment_size
+	print("Calculated Segment Levels:\n", segment_levels)
+
+
+func rescale(new_scale : Vector2) -> void:
+	set_scale(new_scale)
+	_calc_segment_levels(rings.size())
 
 
 func _ready() -> void:
@@ -129,9 +136,10 @@ func _click_event(event : InputEventMouseButton):
 	if event.pressed:
 		var local_pos : Vector2 = event.position - global_position
 		var dist : float = Vector2.ZERO.distance_to(local_pos)
+		print("CLICK_DATA... CLICK_POS_LOCAL: ", local_pos, " | CLICK_DIST_FROM_CENTER: ", dist)
 		_active_ring_forget()
-		if _check_segment(dist - click_min) >= 0:
-			ring_selected_id = _check_segment(dist - click_min)
+		if _check_segment(dist - (click_min * scale.x)) >= 0:
+			ring_selected_id = _check_segment(dist - (click_min * scale.x))
 			ring_selected_rot = rings[ring_selected_id].rotation
 			click_on_pos = local_pos
 	else:
