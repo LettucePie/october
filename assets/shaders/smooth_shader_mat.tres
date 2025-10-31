@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dvu6yaceuxpus"]
+
+[ext_resource type="Shader" uid="uid://b4ynp8djaiieo" path="res://assets/shaders/smooth_shader.gdshader" id="1_yna7y"]
+
+[resource]
+shader = ExtResource("1_yna7y")
+shader_parameter/THRESHOLD = 0.1
+shader_parameter/AA_SCALE = 2.0

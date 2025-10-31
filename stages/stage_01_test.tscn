@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dled7keirclfi"]
+[gd_scene load_steps=7 format=3 uid="uid://dled7keirclfi"]
 
 [ext_resource type="Script" uid="uid://cykug2x5ji3h3" path="res://stages/stage.gd" id="1_p3s4r"]
 [ext_resource type="PackedScene" uid="uid://dk562dv21sngq" path="res://rings/ring_4a.tscn" id="2_ww81d"]
 [ext_resource type="PackedScene" uid="uid://dgolblnjyhh4o" path="res://rings/ring_3a.tscn" id="3_unakv"]
 [ext_resource type="PackedScene" uid="uid://b1gaxp4oi33wh" path="res://rings/ring_2a.tscn" id="4_7fril"]
 [ext_resource type="PackedScene" uid="uid://c3py07223e7mq" path="res://rings/ring_1b.tscn" id="5_p3s4r"]
-[ext_resource type="Script" uid="uid://c7sw8rgxodvsm" path="res://components/segment_solver.gd" id="6_ww81d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
 size = Vector2(300, 10)
@@ -31,21 +30,3 @@ rotation = 1.8308504
 [node name="CollisionShape2D" type="CollisionShape2D" parent="solution"]
 position = Vector2(150, 0)
 shape = SubResource("RectangleShape2D_ryrav")
-
-[node name="segment_solver" type="Node2D" parent="."]
-script = ExtResource("6_ww81d")
-
-[node name="Marker2D" type="Marker2D" parent="segment_solver"]
-position = Vector2(50, 0)
-
-[node name="Marker2D2" type="Marker2D" parent="segment_solver"]
-position = Vector2(100, 0)
-
-[node name="Marker2D3" type="Marker2D" parent="segment_solver"]
-position = Vector2(150, 0)
-
-[node name="Marker2D4" type="Marker2D" parent="segment_solver"]
-position = Vector2(200, 0)
-
-[node name="Marker2D5" type="Marker2D" parent="segment_solver"]
-position = Vector2(250, 0)
