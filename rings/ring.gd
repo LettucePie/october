@@ -37,6 +37,19 @@ func _process(delta: float) -> void:
 	self.rotation = lerp_angle(self.rotation, rot_target, 8 * delta)
 
 
+func update_rot_target(new_target : float) -> void:
+	var target : float = new_target
+	for i in interactives:
+		if i is Channel:
+			target = clampf(
+				target, 
+				deg_to_rad(i.point_a_angle) - PI,
+				deg_to_rad(i.point_b_angle)
+			)
+			print(target, " | ", rad_to_deg(target))
+	rot_target = target
+
+
 func solution_proxima(tf : bool) -> void:
 	#print("Ring: ", self.name, " Solution: ", tf)
 	solution = tf

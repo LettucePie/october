@@ -12,8 +12,12 @@ var arc_points : int = 10
 
 
 func _process(delta) -> void:
-	point_a = self.position + (Vector2.RIGHT.rotated(deg_to_rad(point_a_angle)) * (DEF_radius * radius_multiplier + 25))
-	point_b = self.position + (Vector2.RIGHT.rotated(deg_to_rad(point_b_angle)) * (DEF_radius * radius_multiplier + 25))
+	point_a = self.position + (
+		Vector2.RIGHT.rotated(deg_to_rad(point_a_angle)) * (DEF_radius * radius_multiplier + 25)
+	)
+	point_b = self.position + (
+		Vector2.RIGHT.rotated(deg_to_rad(point_b_angle)) * (DEF_radius * radius_multiplier + 25)
+	)
 	arc_points = 10 + int(3 * radius_multiplier)
 	queue_redraw()
 

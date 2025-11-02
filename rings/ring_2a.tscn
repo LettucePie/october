@@ -17,7 +17,7 @@ height = 500
 script = ExtResource("1_ov22u")
 level = 2
 clearings = [NodePath("clearing")]
-interactives = [null]
+interactives = [NodePath("channel")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 8

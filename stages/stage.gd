@@ -16,7 +16,6 @@ var segment_levels : PackedVector2Array = []
 var ring_selected_id : int = -1
 var ring_selected_rot : float = -1000
 var click_on_pos : Vector2 = Vector2.ZERO
-#var ring_targets : PackedFloat32Array = []
 
 
 func _find_ring_children() -> void:
@@ -31,7 +30,7 @@ func _connect_rings() -> void:
 		for r in rings:
 			if !r.ring_solved.is_connected(ring_status_report):
 				r.ring_solved.connect(ring_status_report)
-			r.rot_target = r.rotation
+			r.update_rot_target(r.rotation)
 
 
 func _calc_segment_levels(steps : int):
@@ -63,10 +62,6 @@ func _ready() -> void:
 		val = false
 
 
-#func dial_ring_to(id : int, rot : float) -> void:
-	#rings[id].rotation = rot
-
-
 func _snap_ring_to_solution(id : int) -> void:
 	print("Snapping Ring: ", id)
 	var ring : Ring = rings[id]
@@ -95,7 +90,7 @@ func _snap_ring_to_solution(id : int) -> void:
 	print("RINGROT: ", ring_rot, " | RINGROT_TAUD: ", ring_rot_taud)
 	print("RING VIABLES: ", viable_angles, " | CHOSEN ANGLE: ", closest_snap_angle)
 	print("NEW TARGET: ", new_target)
-	rings[id].rot_target = new_target
+	rings[id].update_rot_target(new_target)
 
 
 func _check_solution() -> bool:
@@ -146,9 +141,7 @@ func _move_event(event : InputEventMouseMotion):
 	var angle_a : float = Vector2.RIGHT.angle_to(click_on_pos.normalized())
 	var angle_b : float = Vector2.RIGHT.angle_to(localized_mouse_pos.normalized())
 	var angle_diff : float = angle_b - angle_a
-	#print("AngleA: ", angle_a, " | AngleB: ", angle_b, " | AngleDiff: ", angle_diff)
-	rings[ring_selected_id].rot_target = ring_selected_rot + angle_diff
-	#dial_ring_to(ring_selected_id, ring_selected_rot + angle_diff)
+	rings[ring_selected_id].update_rot_target(ring_selected_rot + angle_diff)
 
 
 func _input(event: InputEvent) -> void:
