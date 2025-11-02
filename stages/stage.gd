@@ -16,7 +16,7 @@ var segment_levels : PackedVector2Array = []
 var ring_selected_id : int = -1
 var ring_selected_rot : float = -1000
 var click_on_pos : Vector2 = Vector2.ZERO
-var ring_targets : PackedFloat32Array = []
+#var ring_targets : PackedFloat32Array = []
 
 
 func _find_ring_children() -> void:
@@ -31,6 +31,7 @@ func _connect_rings() -> void:
 		for r in rings:
 			if !r.ring_solved.is_connected(ring_status_report):
 				r.ring_solved.connect(ring_status_report)
+			r.rot_target = r.rotation
 
 
 func _calc_segment_levels(steps : int):
@@ -60,14 +61,10 @@ func _ready() -> void:
 	solution_status.resize(rings.size())
 	for val in solution_status:
 		val = false
-	## Setup base rotation values
-	ring_targets.resize(rings.size())
-	for i in rings.size():
-		ring_targets[i] = rings[i].rotation
 
 
-func dial_ring_to(id : int, rot : float) -> void:
-	rings[id].rotation = rot
+#func dial_ring_to(id : int, rot : float) -> void:
+	#rings[id].rotation = rot
 
 
 func _snap_ring_to_solution(id : int) -> void:
@@ -98,7 +95,7 @@ func _snap_ring_to_solution(id : int) -> void:
 	print("RINGROT: ", ring_rot, " | RINGROT_TAUD: ", ring_rot_taud)
 	print("RING VIABLES: ", viable_angles, " | CHOSEN ANGLE: ", closest_snap_angle)
 	print("NEW TARGET: ", new_target)
-	ring_targets[id] = new_target
+	rings[id].rot_target = new_target
 
 
 func _check_solution() -> bool:
@@ -110,11 +107,6 @@ func _check_solution() -> bool:
 				solved = false
 		result = solved
 	return result
-
-
-func _process(delta: float) -> void:
-	for i in rings.size():
-		dial_ring_to(i, lerp_angle(rings[i].rotation, ring_targets[i], 8 * delta))
 
 
 func _check_segment(dist : float) -> int:
@@ -155,7 +147,7 @@ func _move_event(event : InputEventMouseMotion):
 	var angle_b : float = Vector2.RIGHT.angle_to(localized_mouse_pos.normalized())
 	var angle_diff : float = angle_b - angle_a
 	#print("AngleA: ", angle_a, " | AngleB: ", angle_b, " | AngleDiff: ", angle_diff)
-	ring_targets[ring_selected_id] = ring_selected_rot + angle_diff
+	rings[ring_selected_id].rot_target = ring_selected_rot + angle_diff
 	#dial_ring_to(ring_selected_id, ring_selected_rot + angle_diff)
 
 

@@ -2,18 +2,21 @@ extends Node2D
 class_name Ring
 signal ring_solved(ring, tf)
 
+## Gameplay Setups
 @export var level : int = 0
 enum CUTOUT {A, B, C, D}
 @export var cutout_shape : CUTOUT = CUTOUT.A
 @export var clearings : Array[Clearing] = []
 @export var interactives : Array[Interactive] = []
 
+## VFX
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var light : PointLight2D = $PointLight2D
 
-
+## Run-Time Dynamics
 var light_rotate_var : float = 1.0
 var solution : bool = false
+var rot_target : float = 0.0
 
 
 func _ready() -> void:
@@ -31,6 +34,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	light.rotation += delta * light_rotate_var
+	self.rotation = lerp_angle(self.rotation, rot_target, 8 * delta)
 
 
 func solution_proxima(tf : bool) -> void:
