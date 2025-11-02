@@ -43,7 +43,7 @@ func update_rot_target(new_target : float) -> void:
 		if i is Channel:
 			target = clampf(
 				target, 
-				deg_to_rad(i.point_a_angle) - PI,
+				deg_to_rad(i.point_a_angle),
 				deg_to_rad(i.point_b_angle)
 			)
 			print(target, " | ", rad_to_deg(target))
