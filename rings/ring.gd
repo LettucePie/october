@@ -6,7 +6,7 @@ signal ring_solved(ring, tf)
 enum CUTOUT {A, B, C, D}
 @export var cutout_shape : CUTOUT = CUTOUT.A
 @export var clearings : Array[Clearing] = []
-@export var interactives : Array = []
+@export var interactives : Array[Interactive] = []
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var light : PointLight2D = $PointLight2D

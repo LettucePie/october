@@ -20,7 +20,7 @@ rotation = 2.8064895
 rotation = -0.97563905
 
 [node name="Ring_2A" parent="." instance=ExtResource("4_7fril")]
-rotation = 1.097812
+rotation = 0.7853982
 
 [node name="Ring_1B" parent="." instance=ExtResource("5_p3s4r")]
 rotation = 1.8308504

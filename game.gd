@@ -4,6 +4,7 @@ class_name Game
 const BASE_WINDOW : Vector2 = Vector2(700, 500)
 
 @export var center_stage : Stage
+@onready var waypoint : Waypoint = $waypoint
 #var rings : Array[Ring] = []
 
 
@@ -34,6 +35,7 @@ func recenter() -> void:
 	else:
 		print("Go Horizontal")
 	center_stage.rescale(Vector2(factor_b / factor_a, factor_b / factor_a))
+	#waypoint.set_scale(Vector2(factor_b / factor_a, factor_b / factor_a))
 
 
 func stage_solved() -> void:
