@@ -16,27 +16,26 @@ var point_a : Vector2 = Vector2.ZERO
 var point_b : Vector2 = Vector2.ZERO
 var anchor_point : Vector2 = Vector2.ZERO
 var arc_points : int = 10
-var starting_rot : float = 0.0
+var arc_a : float = 0.0
+var arc_b : float = 0.0
 @onready var clamp_a : float = 0.0
 @onready var clamp_b : float = 0.0
 
 
-func _ready() -> void:
-	if get_parent() is Ring:
-		starting_rot = get_parent().rotation
-
 
 func _process(delta) -> void:
 	point_a = self.position + (
-		Vector2.RIGHT.rotated(deg_to_rad(point_a_angle + 180)) * (DEF_radius * radius_multiplier + 25)
+		Vector2.LEFT.rotated(deg_to_rad(point_a_angle * -1)) * (DEF_radius * radius_multiplier + 25)
 	)
 	point_b = self.position + (
-		Vector2.RIGHT.rotated(deg_to_rad(point_b_angle + 180)) * (DEF_radius * radius_multiplier + 25)
+		Vector2.LEFT.rotated(deg_to_rad(point_b_angle * -1)) * (DEF_radius * radius_multiplier + 25)
 	)
 	arc_points = 10 + int(3 * radius_multiplier)
 	anchor_point = self.position + (
-		Vector2.RIGHT.rotated(deg_to_rad(anchor_angle + 180) - self.global_rotation) * (DEF_radius * radius_multiplier + 25)
+		Vector2.LEFT.rotated(deg_to_rad(anchor_angle * -1) - self.global_rotation) * (DEF_radius * radius_multiplier + 25)
 	)
+	arc_a = deg_to_rad(point_a_angle) - PI
+	arc_b = deg_to_rad(point_b_angle) - PI
 	clamp_a = deg_to_rad(point_a_angle)
 	clamp_b = deg_to_rad(point_b_angle)
 	queue_redraw()
@@ -48,8 +47,8 @@ func _draw() -> void:
 	draw_arc(
 		self.position, 
 		DEF_radius * radius_multiplier + 25,
-		deg_to_rad(point_a_angle + 180),
-		deg_to_rad(point_b_angle + 180),
+		arc_a,
+		arc_b,
 		arc_points,
 		Color.BLACK,
 		DEF_outer_arc_w,
@@ -77,8 +76,8 @@ func _draw() -> void:
 	draw_arc(
 		self.position, 
 		DEF_radius * radius_multiplier + 25,
-		deg_to_rad(point_a_angle + 180),
-		deg_to_rad(point_b_angle + 180),
+		arc_a,
+		arc_b,
 		arc_points,
 		Color.WHITE,
 		DEF_inner_arc_w,
