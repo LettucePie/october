@@ -16,10 +16,10 @@ var point_a : Vector2 = Vector2.ZERO
 var point_b : Vector2 = Vector2.ZERO
 var anchor_point : Vector2 = Vector2.ZERO
 var arc_points : int = 10
-var arc_a : float = 0.0
-var arc_b : float = 0.0
-@onready var clamp_a : float = 0.0
-@onready var clamp_b : float = 0.0
+@onready var arc_a : float = deg_to_rad(point_a_angle * -1) - PI
+@onready var arc_b : float = deg_to_rad(point_b_angle * -1) - PI
+@onready var clamp_a : float = deg_to_rad(point_a_angle)
+@onready var clamp_b : float = deg_to_rad(point_b_angle)
 
 
 
@@ -36,8 +36,8 @@ func _process(delta) -> void:
 	)
 	arc_a = deg_to_rad(point_a_angle * -1) - PI
 	arc_b = deg_to_rad(point_b_angle * -1) - PI
-	clamp_a = deg_to_rad(point_a_angle)
-	clamp_b = deg_to_rad(point_b_angle)
+	clamp_a = deg_to_rad(point_a_angle - anchor_angle)
+	clamp_b = deg_to_rad(point_b_angle - anchor_angle)
 	queue_redraw()
 
 
