@@ -34,8 +34,8 @@ func _process(delta) -> void:
 	anchor_point = self.position + (
 		Vector2.LEFT.rotated(deg_to_rad(anchor_angle * -1) - self.global_rotation) * (DEF_radius * radius_multiplier + 25)
 	)
-	arc_a = deg_to_rad(point_a_angle) - PI
-	arc_b = deg_to_rad(point_b_angle) - PI
+	arc_a = deg_to_rad(point_a_angle * -1) - PI
+	arc_b = deg_to_rad(point_b_angle * -1) - PI
 	clamp_a = deg_to_rad(point_a_angle)
 	clamp_b = deg_to_rad(point_b_angle)
 	queue_redraw()
