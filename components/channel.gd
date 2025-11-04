@@ -17,6 +17,8 @@ var point_b : Vector2 = Vector2.ZERO
 var anchor_point : Vector2 = Vector2.ZERO
 var arc_points : int = 10
 var starting_rot : float = 0.0
+@onready var clamp_a : float = deg_to_rad(point_a_angle - (90 - anchor_angle))
+@onready var clamp_b : float = deg_to_rad(point_b_angle - (90 - anchor_angle))
 
 
 func _ready() -> void:
@@ -26,15 +28,17 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	point_a = self.position + (
-		Vector2.RIGHT.rotated(deg_to_rad(point_a_angle)) * (DEF_radius * radius_multiplier + 25)
+		Vector2.DOWN.rotated(deg_to_rad(point_a_angle)) * (DEF_radius * radius_multiplier + 25)
 	)
 	point_b = self.position + (
-		Vector2.RIGHT.rotated(deg_to_rad(point_b_angle)) * (DEF_radius * radius_multiplier + 25)
+		Vector2.DOWN.rotated(deg_to_rad(point_b_angle)) * (DEF_radius * radius_multiplier + 25)
 	)
 	arc_points = 10 + int(3 * radius_multiplier)
 	anchor_point = self.position + (
-		Vector2.RIGHT.rotated(deg_to_rad(anchor_angle) - self.global_rotation) * (DEF_radius * radius_multiplier + 25)
+		Vector2.DOWN.rotated(deg_to_rad(anchor_angle) - self.global_rotation) * (DEF_radius * radius_multiplier + 25)
 	)
+	clamp_a = deg_to_rad(point_a_angle - (90 - anchor_angle))
+	clamp_b = deg_to_rad(point_b_angle - (90 - anchor_angle))
 	queue_redraw()
 
 
@@ -44,8 +48,8 @@ func _draw() -> void:
 	draw_arc(
 		self.position, 
 		DEF_radius * radius_multiplier + 25,
-		deg_to_rad(point_a_angle),
-		deg_to_rad(point_b_angle),
+		deg_to_rad(point_a_angle + 90),
+		deg_to_rad(point_b_angle + 90),
 		arc_points,
 		Color.BLACK,
 		DEF_outer_arc_w,
@@ -73,8 +77,8 @@ func _draw() -> void:
 	draw_arc(
 		self.position, 
 		DEF_radius * radius_multiplier + 25,
-		deg_to_rad(point_a_angle),
-		deg_to_rad(point_b_angle),
+		deg_to_rad(point_a_angle + 90),
+		deg_to_rad(point_b_angle + 90),
 		arc_points,
 		Color.WHITE,
 		DEF_inner_arc_w,

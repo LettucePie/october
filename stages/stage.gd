@@ -38,14 +38,13 @@ func _calc_segment_levels(steps : int):
 	segment_levels.resize(steps)
 	var new_max = (click_max * scale.x) - (click_min * scale.x)
 	var segment_size = new_max / steps
-	print("Calculated Ring Segment Size: ", segment_size)
 	var x = 0
 	var y = segment_size
 	for i in steps:
 		segment_levels[i] = Vector2(x, y)
 		x = y
 		y += segment_size
-	print("Calculated Segment Levels:\n", segment_levels)
+	#print("Calculated Segment Levels:\n", segment_levels)
 
 
 func rescale(new_scale : Vector2) -> void:
@@ -63,7 +62,7 @@ func _ready() -> void:
 
 
 func _snap_ring_to_solution(id : int) -> void:
-	print("Snapping Ring: ", id)
+	#print("Snapping Ring: ", id)
 	var ring : Ring = rings[id]
 	var ring_rot : float = ring.rotation
 	var tau_count : int = floori(absf(ring_rot) / TAU)
@@ -87,9 +86,6 @@ func _snap_ring_to_solution(id : int) -> void:
 		new_target += PI
 	if ring_rot < 0:
 		new_target *= -1.0
-	print("RINGROT: ", ring_rot, " | RINGROT_TAUD: ", ring_rot_taud)
-	print("RING VIABLES: ", viable_angles, " | CHOSEN ANGLE: ", closest_snap_angle)
-	print("NEW TARGET: ", new_target)
 	rings[id].update_rot_target(new_target)
 
 
@@ -123,7 +119,6 @@ func _click_event(event : InputEventMouseButton):
 	if event.pressed:
 		var local_pos : Vector2 = event.position - global_position
 		var dist : float = Vector2.ZERO.distance_to(local_pos)
-		print("CLICK_DATA... CLICK_POS_LOCAL: ", local_pos, " | CLICK_DIST_FROM_CENTER: ", dist)
 		_active_ring_forget()
 		if _check_segment(dist - (click_min * scale.x)) >= 0:
 			ring_selected_id = _check_segment(dist - (click_min * scale.x))
@@ -152,7 +147,6 @@ func _input(event: InputEvent) -> void:
 
 
 func ring_status_report(ring : Ring, solved : bool) -> void:
-	print("RING:" , ring, " REPORTS: ", solved, " to CENTER STAGE")
 	var idx = rings.find(ring)
 	solution_status[idx] = solved
 	if ring_selected_id != idx and solved:

@@ -34,3 +34,5 @@ position = Vector2(174, 0)
 
 [node name="channel" parent="." instance=ExtResource("4_awhe1")]
 radius_multiplier = 3.0
+point_a_angle = 0.0
+point_b_angle = 90.0

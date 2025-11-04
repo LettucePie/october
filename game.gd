@@ -23,7 +23,6 @@ func _ready() -> void:
 
 
 func recenter() -> void:
-	print("Recenter")
 	var win_size : Vector2i = get_window().size
 	center_stage.position = win_size / 2
 	var factor_a : float = BASE_WINDOW.y
