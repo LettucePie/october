@@ -16,6 +16,12 @@ var point_a : Vector2 = Vector2.ZERO
 var point_b : Vector2 = Vector2.ZERO
 var anchor_point : Vector2 = Vector2.ZERO
 var arc_points : int = 10
+var starting_rot : float = 0.0
+
+
+func _ready() -> void:
+	if get_parent() is Ring:
+		starting_rot = get_parent().rotation
 
 
 func _process(delta) -> void:
