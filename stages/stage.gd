@@ -137,6 +137,8 @@ func _move_event(event : InputEventMouseMotion):
 	var angle_b : float = Vector2.RIGHT.angle_to(localized_mouse_pos.normalized())
 	var angle_diff : float = angle_difference(angle_a, angle_b)
 	print("ROT: ", ring_selected_rot, "\nA: ", angle_a, "\nB: ", angle_b, "\nDIFF: ", angle_diff, "\nRESULT: ", ring_selected_rot + angle_diff)
+	print("Maybe calculate active difference between the ring rotation and the mouse rotation... then we're only adding or subtracting by 90 degrees at a time.")
+	print("Currently because we're locked down by angle_a being the initial click point we can endlessly wrap around the weird -180 +180 point.")
 	rings[ring_selected_id].update_rot_target(ring_selected_rot + angle_diff)
 
 
