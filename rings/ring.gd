@@ -41,10 +41,7 @@ func update_rot_target(new_target : float) -> void:
 	var target : float = new_target
 	for i in interactives:
 		if i is Channel:
-			print("Pre Clamp: ", rad_to_deg(target))
-			target = clampf(target, i.clamp_a, i.clamp_b)
-			print("Post Clamp: ", rad_to_deg(target))
-			print("ClampA: ", rad_to_deg(i.clamp_a), " | ClampB: ", rad_to_deg(i.clamp_b))
+			target = i.dynamic_clamp(new_target, self.rotation)
 	rot_target = target
 
 

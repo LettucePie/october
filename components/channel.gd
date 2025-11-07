@@ -18,9 +18,6 @@ var anchor_point : Vector2 = Vector2.ZERO
 var arc_points : int = 10
 @onready var arc_a : float = deg_to_rad(point_a_angle * -1) - PI
 @onready var arc_b : float = deg_to_rad(point_b_angle * -1) - PI
-@onready var clamp_a : float = deg_to_rad(point_a_angle)
-@onready var clamp_b : float = deg_to_rad(point_b_angle)
-
 
 
 func _process(delta) -> void:
@@ -36,9 +33,15 @@ func _process(delta) -> void:
 	)
 	arc_a = deg_to_rad(point_a_angle * -1) - PI
 	arc_b = deg_to_rad(point_b_angle * -1) - PI
-	clamp_a = deg_to_rad(point_a_angle - anchor_angle)
-	clamp_b = deg_to_rad(point_b_angle - anchor_angle)
 	queue_redraw()
+
+
+func dynamic_clamp(target_rot : float, ring_rot : float) -> float:
+	var result : float = target_rot
+	var clamp_a = deg_to_rad(point_a_angle - anchor_angle)
+	var clamp_b = deg_to_rad(point_b_angle - anchor_angle)
+	result = clampf(target_rot, clamp_a, clamp_b)
+	return result
 
 
 func _draw() -> void:

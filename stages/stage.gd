@@ -135,7 +135,8 @@ func _move_event(event : InputEventMouseMotion):
 	var localized_mouse_pos : Vector2 = event.position - global_position
 	var angle_a : float = Vector2.RIGHT.angle_to(click_on_pos.normalized())
 	var angle_b : float = Vector2.RIGHT.angle_to(localized_mouse_pos.normalized())
-	var angle_diff : float = angle_b - angle_a
+	var angle_diff : float = angle_difference(angle_a, angle_b)
+	print("ROT: ", ring_selected_rot, "\nA: ", angle_a, "\nB: ", angle_b, "\nDIFF: ", angle_diff, "\nRESULT: ", ring_selected_rot + angle_diff)
 	rings[ring_selected_id].update_rot_target(ring_selected_rot + angle_diff)
 
 
